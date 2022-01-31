@@ -6,6 +6,7 @@
 #include <vnx/Hash64.hpp>
 #include <vnx/Object.hpp>
 #include <vnx/Value.h>
+#include <vnx/Variant.hpp>
 #include <vnx/addons/HttpData.hxx>
 
 #include <vnx/vnx.h>
@@ -170,8 +171,6 @@ void HttpResponse::set_field(const std::string& _name, const vnx::Variant& _valu
 		_value.to(total_size);
 	} else if(_name == "error_text") {
 		_value.to(error_text);
-	} else {
-		throw std::logic_error("no such field: '" + _name + "'");
 	}
 }
 
