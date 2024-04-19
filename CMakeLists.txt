@@ -16,8 +16,6 @@ endif()
 add_compile_definitions(NOGDI NOMINMAX)
 
 find_package(ZLIB REQUIRED)
-list(APPEND CMAKE_MODULE_PATH "/usr/local/lib/cmake/zstd")
-find_package(zstd CONFIG REQUIRED)
 
 file(GLOB GENERATED_SOURCE_FILES generated/src/*.cpp)
 file(GLOB URL_CPP_SOURCE_FILES lib/url-cpp/src/*.cpp)
@@ -67,7 +65,12 @@ target_include_directories(vnx_addons
 		generated/include
 )
 
-target_link_libraries(vnx_addons vnx_base url_cpp llhttp zstd::libzstd_shared ZLIB::ZLIB)
+if(WIN32)
+	find_package(zstd CONFIG REQUIRED)
+	add_library(zstd ALIAS zstd::libzstd_shared)
+endif()
+
+target_link_libraries(vnx_addons vnx_base url_cpp llhttp zstd ZLIB::ZLIB)
 
 if(MSVC)
 	set_target_properties(vnx_addons PROPERTIES LINK_OPTIONS "/NODEFAULTLIB:LIBCMT")
