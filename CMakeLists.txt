@@ -16,7 +16,7 @@ endif()
 add_compile_definitions(NOGDI NOMINMAX)
 
 find_package(ZLIB REQUIRED)
-find_package(zstd CONFIG REQUIRED)
+find_package(zstd REQUIRED)
 
 file(GLOB GENERATED_SOURCE_FILES generated/src/*.cpp)
 file(GLOB URL_CPP_SOURCE_FILES lib/url-cpp/src/*.cpp)
