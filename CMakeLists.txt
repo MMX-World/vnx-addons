@@ -16,6 +16,7 @@ endif()
 add_compile_definitions(NOGDI NOMINMAX)
 
 find_package(ZLIB REQUIRED)
+list(APPEND CMAKE_MODULE_PATH "/usr/local/lib/cmake/zstd")
 find_package(zstd CONFIG REQUIRED)
 
 file(GLOB GENERATED_SOURCE_FILES generated/src/*.cpp)
