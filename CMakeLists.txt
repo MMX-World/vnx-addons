@@ -16,6 +16,7 @@ endif()
 add_compile_definitions(NOGDI NOMINMAX)
 
 find_package(ZLIB REQUIRED)
+find_package(zstd CONFIG REQUIRED)
 
 file(GLOB GENERATED_SOURCE_FILES generated/src/*.cpp)
 file(GLOB URL_CPP_SOURCE_FILES lib/url-cpp/src/*.cpp)
@@ -65,7 +66,7 @@ target_include_directories(vnx_addons
 		generated/include
 )
 
-target_link_libraries(vnx_addons vnx_base url_cpp llhttp zstd ZLIB::ZLIB)
+target_link_libraries(vnx_addons vnx_base url_cpp llhttp zstd::libzstd_shared ZLIB::ZLIB)
 
 if(MSVC)
 	set_target_properties(vnx_addons PROPERTIES LINK_OPTIONS "/NODEFAULTLIB:LIBCMT")
